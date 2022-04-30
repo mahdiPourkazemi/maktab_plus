@@ -27,7 +27,7 @@ suspend inline fun <T> safeApiCall(
 ) = flow {
     emit(ResultWrapper.Loading)
     try {
-        val response=apiCall.invoke()
+        val response=apiCall() //() after name or .invoke()
         val responseBody=response.body()
         if (response.isSuccessful && responseBody!=null) {
              emit(ResultWrapper.Success(responseBody))

@@ -1,16 +1,18 @@
 package com.pourkazemi.mahdi.mymaktabplus.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.pourkazemi.mahdi.mymaktabplus.R
 import com.pourkazemi.mahdi.mymaktabplus.databinding.FragmentHomeBinding
+import com.pourkazemi.mahdi.mymaktabplus.util.ResultWrapper
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -35,13 +37,36 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.pictureListState.collect {
-                    adapter.submitList(it)
+                viewModel.pictureFlow.collect {
+                    when (it) {
+                        is ResultWrapper.Loading -> startAnime()
+                        is ResultWrapper.Success -> {
+                            adapter.submitList(it.value)
+                            stopAnime()
+                        }
+                        is ResultWrapper.Error -> {
+                            stopAnime()
+                            Toast.makeText(
+                                requireActivity(),
+                                it.message,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
                 }
             }
         }
     }
 
+    fun startAnime() {
+        binding.loadingAnime.isVisible = true
+        binding.loadingAnime.playAnimation()
+    }
+
+    fun stopAnime() {
+        binding.loadingAnime.isVisible = false
+        binding.loadingAnime.pauseAnimation()
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
