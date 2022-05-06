@@ -22,10 +22,11 @@ class StateView @JvmOverloads constructor(context: Context, attrs: AttributeSet)
     init {
         val view = inflate(context, R.layout.stateview, this)
         binding = StateviewBinding.bind(view)
-/*        attrs.getAttributeResourceValue()
-        attrs.getAttributeValue()*/
         val attributes = context.obtainStyledAttributes(attrs, R.styleable.StateView)
-        text = attributes.getString(R.styleable.StateView_state_text) ?: ""
+        text = attributes.getString(R.styleable.StateView_state_text) ?:
+            attrs.getAttributeResourceValue(R.styleable.StateView_state_text, -1).run {
+                context.resources.getString(this)
+            }
         Log.d("StateView", "Log stateViw $text")
         attributes.recycle()
     }
