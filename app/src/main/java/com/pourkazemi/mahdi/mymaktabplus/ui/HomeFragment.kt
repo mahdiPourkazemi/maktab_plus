@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.pourkazemi.mahdi.mymaktabplus.R
 import com.pourkazemi.mahdi.mymaktabplus.data.remotedata.model.PictureItem
 import com.pourkazemi.mahdi.mymaktabplus.databinding.FragmentHomeBinding

@@ -4,6 +4,8 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pourkazemi.mahdi.mymaktabplus.data.Repository
+import com.pourkazemi.mahdi.mymaktabplus.data.localdetabase.data_store.PreferencesInfo
+import com.pourkazemi.mahdi.mymaktabplus.data.localdetabase.data_store.SettingDataStore
 import com.pourkazemi.mahdi.mymaktabplus.data.remotedata.model.PictureItem
 import com.pourkazemi.mahdi.mymaktabplus.util.ResultWrapper
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val repository: Repository
+    private val repository: Repository,
 ) : ViewModel() {
     /*    private val _pictureListState:
                 MutableStateFlow<List<PictureItem>> = MutableStateFlow(listOf())

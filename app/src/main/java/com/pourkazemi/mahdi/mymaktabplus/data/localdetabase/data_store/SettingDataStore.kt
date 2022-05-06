@@ -8,6 +8,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -22,7 +23,7 @@ class SettingDataStore @Inject constructor(
 ) {
     private val dataStore = context.dataStore
 
-    val preferences = dataStore.data.catch { cause ->
+    val preferences: Flow<PreferencesInfo> = dataStore.data.catch { cause ->
         Log.e("datastore_error", cause.message.toString())
     }.map { preference ->
         val theme: Theme = Theme.valueOf(preference[SettingPreferencesKey.KEY_THEME] ?: Theme.AUTO.name)

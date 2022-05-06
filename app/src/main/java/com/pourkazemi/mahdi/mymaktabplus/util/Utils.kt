@@ -1,5 +1,6 @@
 package com.pourkazemi.mahdi.mymaktabplus.util
 
+import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.pourkazemi.mahdi.mymaktabplus.data.remotedata.model.PictureItem
@@ -52,4 +53,8 @@ suspend inline fun <T> safeApiCall(
     }finally {
        // emit(ResultWrapper.Error("finally you .."))
     }
+}
+
+fun logger(msg: String) {
+    Log.d("app_logger", msg)
 }
