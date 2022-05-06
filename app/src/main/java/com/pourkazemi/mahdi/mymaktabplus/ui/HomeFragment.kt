@@ -10,6 +10,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.pourkazemi.mahdi.mymaktabplus.R
+import com.pourkazemi.mahdi.mymaktabplus.data.remotedata.model.PictureItem
 import com.pourkazemi.mahdi.mymaktabplus.databinding.FragmentHomeBinding
 import com.pourkazemi.mahdi.mymaktabplus.util.ResultWrapper
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,13 +36,18 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.pictureFlow.collect {
                     when (it) {
-                        is ResultWrapper.Loading -> startAnime()
+                        is ResultWrapper.Loading -> binding.stateView.onLoading()
                         is ResultWrapper.Success -> {
+                            //val emptyList= listOf<PictureItem>() //#for check empty list worked
                             adapter.submitList(it.value)
-                            stopAnime()
+                            if (it.value.isNotEmpty()) {
+                                binding.stateView.onSuccess()
+                            } else {
+                                binding.stateView.onEmpty()
+                            }
                         }
                         is ResultWrapper.Error -> {
-                            stopAnime()
+                            binding.stateView.onFail()
                             Toast.makeText(
                                 requireActivity(),
                                 it.message,
@@ -52,16 +58,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 }
             }
         }
-    }
-
-    fun startAnime() {
-        binding.loadingAnime.isVisible = true
-        binding.loadingAnime.playAnimation()
-    }
-
-    fun stopAnime() {
-        binding.loadingAnime.isVisible = false
-        binding.loadingAnime.pauseAnimation()
     }
 
     override fun onDestroyView() {

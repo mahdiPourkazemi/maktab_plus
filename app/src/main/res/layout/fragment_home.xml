@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,19 +9,33 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="2"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="-165dp" />
 
-    <com.airbnb.lottie.LottieAnimationView
+    <com.pourkazemi.mahdi.mymaktabplus.wiget.StateView
+        android:id="@+id/state_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.25"
+        app:state_text="state text" />
+
+<!--    <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/loading_anime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:lottie_loop="true"
         android:visibility="gone"
         app:lottie_autoPlay="false"
-        app:lottie_rawRes="@raw/anim_loading" />
+        app:lottie_rawRes="@raw/anim_loading" />-->
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout >
