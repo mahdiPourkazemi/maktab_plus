@@ -27,7 +27,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.25"
-        app:state_text="state text" />
+        app:state_text="@string/app_name" />
 
 <!--    <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/loading_anime"

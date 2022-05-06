@@ -48,6 +48,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                         }
                         is ResultWrapper.Error -> {
                             binding.stateView.onFail()
+                            binding.stateView.clickRequest {
+                                viewModel.getPictureList()
+                            }
                             Toast.makeText(
                                 requireActivity(),
                                 it.message,
