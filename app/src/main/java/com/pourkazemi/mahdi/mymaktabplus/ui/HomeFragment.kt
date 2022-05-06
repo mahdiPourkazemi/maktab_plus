@@ -1,7 +1,6 @@
 package com.pourkazemi.mahdi.mymaktabplus.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
@@ -23,9 +22,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val binding: FragmentHomeBinding
         get() = _binding!!
 
-    /*
-        @Inject
-        lateinit var viewModel: HomeViewModel*/
     private val viewModel: HomeViewModel by viewModels()
 
     @Inject
